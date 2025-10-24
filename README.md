@@ -25,3 +25,66 @@ Important Note on AWS Region
 > Resources Used
 > -Youtube
 > -Gemini
+
+🇳🇬 Nigerian Tax & Business Advisor
+
+This is a Python-based command-line tool that uses AI to analyze financial data from a CSV or Excel file. It calculates a company's Nigerian tax liabilities (CIT, TET, and VAT), audits tax payments, and provides both tax compliance recommendations and scannable business growth advice.
+
+This tool is powered by the Llama 3 70B model via AWS Bedrock.
+
+Features
+
+File Input: Reads financial data directly from .csv or .xlsx files.
+
+Comprehensive Tax Calculation:
+
+Profit Tax: Calculates Corporate Income Tax (CIT) based on company size (Medium/Large) and Tertiary Education Tax (TET).
+
+VAT: Calculates Value Added Tax (VAT) remittable to FIRS.
+
+Compliance Audit: Compares the calculated tax due against a "Profit Tax Paid" field from your file to determine if the company is compliant, underpaid, or has overpaid.
+
+Dual-AI Advice:
+
+Tax Compliance: Provides actionable steps for remaining compliant.
+
+Business Growth: Analyzes financial data (e.g., revenue vs. expenses) to give high-level business advice.
+
+Prerequisites
+
+Python 3.8+
+
+An AWS Account: You must have access to AWS Bedrock and have enabled access for the meta.llama3-70b-instruct-v1:0 model.
+
+AWS Credentials: Your AWS access keys must be configured in your environment (e.g., via aws configure or environment variables).
+
+Installation
+
+Clone this repository or save the Python script (nigerian_tax_calculator.py) to your computer.
+
+Install the required Python libraries:
+
+pip install boto3 pydantic instructor pandas openpyxl
+
+
+Data File Format
+
+Your .csv or .xlsx file must contain columns that can be identified as "metrics" and "amounts." The script is flexible but works best with headers like:
+
+Metric Column: Metric, Item, Description, Particulars
+
+Amount Column: Amount_NGN, Amount, Value, NGN
+
+The script will search for the following keywords in your Metric Column (case-insensitive):
+
+Total Revenue (or Sales) - Mandatory
+
+Cost of Sales
+
+Operating Expenses
+
+Profit Tax Paid (or CIT Paid, Tax Paid)
+
+Output VAT (or VAT on Sales)
+
+Input VAT (or VAT on Purchases)
